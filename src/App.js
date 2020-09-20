@@ -11,6 +11,7 @@ import "./App.css";
 
 import Nav from "./components/nav";
 import Home from "./components/home";
+import Task from "./components/task";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Nav />
         <div className="container">
           <Route path="/" exact component={Home}></Route>
+          <Route path="/task" component={Task}></Route>
         </div>
       </Router>
     </div>
