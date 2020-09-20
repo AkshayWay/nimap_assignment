@@ -6,51 +6,45 @@ import {
   hashHistory,
 } from "react-router-dom";
 import App from "../App.css";
+import Dropdown from "./dropdown";
+import Information from "./information";
 
-export default class Home extends Component {
+export default class navbar extends Component {
   constructor() {
     super();
+    this.state = { selectedValue: "" };
+    //this.handleChange = this.handleChange.bind(this);
   }
+  //   changeDrp(changedValue) {
+  //     this.setState({ selectedValue: changedValue });
+  //     alert("changedValue" + changedValue);
+  //   }
+  onUpdate = (val) => {
+    this.setState({
+      selectedValue: val,
+    });
+  };
+  //   renderSwitch(param) {
+  //     switch (param) {
+  //       case "1":
+  //         return "Hi Akshay its one";
+  //       case "2":
+  //         return "Hi Manish its Two";
+  //       default:
+  //         return "foo";
+  //     }
+  //   }
 
   render() {
-    // const UserLoggedIn = this.state.LoggedIn ? "inherit" : "none";
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <a className="navbar-brand" href="#">
-          Logo
-        </a>
-
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home <span className="sr-only">(current)</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Taks
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Users
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <div>
+        <Dropdown
+          //handleChange={(this.changeDrp.bind(), this.props.selectedOption)}
+          onUpdate={this.onUpdate}
+          selectedOption={this.state.selectedValue}
+        />
+        <Information passedVal={this.state.selectedValue} />
+      </div>
     );
   }
 }
