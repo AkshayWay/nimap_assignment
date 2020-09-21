@@ -17,7 +17,7 @@ export default class dropdown extends Component {
         <select
           value={this.props.fieldVal}
           onChange={this.handleChange}
-          class="form-control"
+          className="form-control"
           style={{ width: "25%", marginTop: "20px", marginBottom: "20px" }}
         >
           <option value="0">Select Title</option>

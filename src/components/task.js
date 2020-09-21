@@ -1,6 +1,7 @@
 import React, { component, Component } from "react";
+import { Modal, Button, Form, Col, Alert } from "react-bootstrap";
 import axios from "axios";
-
+var items = [];
 const TaskList = (props) => (
   <tr>
     <td>{props.TaskInfo.id}</td>
@@ -11,12 +12,63 @@ const TaskList = (props) => (
     </td>
 
     <td>
-      <button type="button" class="btn btn-danger">
-        Delete
-      </button>
+      <DeleteNewsInfo variant={props.TaskInfo} />
     </td>
   </tr>
 );
+
+function DeleteNewsInfo(props) {
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  console.log("props.TaskInfo:" + props.variant.title);
+  const deleteAndClose = () => {
+    var retrievedData = localStorage.getItem("LocalDataArr");
+    var items = JSON.parse(localStorage.getItem("LocalDataArr"));
+
+    // items = items.filter((item) => item.id == props.variant.id);
+    // alert("Length:" + items.length);
+    // if (items.length !== 0) {
+    //   localStorage.removeItem("LocalDataArr");
+    // }
+    // console.log("new data", localStorage.getItem("LocalDataArr"));
+
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      if (item.id == props.variant.id) {
+        items.splice(i, 1);
+      }
+    }
+    items = JSON.stringify(items);
+    localStorage.setItem("LocalDataArr", items);
+    console.log("New data", localStorage.getItem("LocalDataArr"));
+    setShow(false);
+  };
+  return (
+    <>
+      <Button variant="primary" onClick={handleShow}>
+        Delete
+      </Button>
+
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          You want to delete '<b>{props.variant.title}</b>' ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={deleteAndClose}>
+            Delete
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
 
 export default class task extends Component {
   constructor(props) {
@@ -31,6 +83,11 @@ export default class task extends Component {
         dataArr: response.data,
       });
       console.log("Data", this.state.dataArr);
+      localStorage.setItem("LocalDataArr", JSON.stringify(this.state.dataArr));
+      //var retrievedData = localStorage.getItem("LocalDataArr");
+      //items = JSON.parse(retrievedData);
+
+      // items = items.filter((item) => item.id == 2);
     });
   }
   //   handleChange = (e) => {
@@ -41,7 +98,6 @@ export default class task extends Component {
   taskList() {
     if (this.state.dataArr.length > 0) {
       return this.state.dataArr.map(function (currentDataArr, i) {
-        console.log("Inside map function", currentDataArr);
         return <TaskList TaskInfo={currentDataArr} key={i}></TaskList>;
       });
     } else {
