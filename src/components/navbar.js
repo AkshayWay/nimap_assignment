@@ -13,36 +13,22 @@ export default class navbar extends Component {
   constructor() {
     super();
     this.state = { selectedValue: "" };
-    //this.handleChange = this.handleChange.bind(this);
   }
-  //   changeDrp(changedValue) {
-  //     this.setState({ selectedValue: changedValue });
-  //     alert("changedValue" + changedValue);
-  //   }
   onUpdate = (val) => {
     this.setState({
       selectedValue: val,
     });
   };
-  //   renderSwitch(param) {
-  //     switch (param) {
-  //       case "1":
-  //         return "Hi Akshay its one";
-  //       case "2":
-  //         return "Hi Manish its Two";
-  //       default:
-  //         return "foo";
-  //     }
-  //   }
-
+  //Navbar is parent component
   render() {
     return (
       <div>
+        {/* child component */}
         <Dropdown
-          //handleChange={(this.changeDrp.bind(), this.props.selectedOption)}
           onUpdate={this.onUpdate}
           selectedOption={this.state.selectedValue}
         />
+        {/* child component */}
         <Information passedVal={this.state.selectedValue} />
       </div>
     );

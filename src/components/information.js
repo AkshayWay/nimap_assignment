@@ -8,10 +8,7 @@ import {
 import App from "../App.css";
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  //Display information on basis of parents input i.e. navbar
   renderSwitch(param) {
     switch (param) {
       case "1":

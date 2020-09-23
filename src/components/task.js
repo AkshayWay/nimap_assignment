@@ -25,7 +25,6 @@ function DeleteTaskInfo(props) {
   const deleteAndClose = () => {
     var retrievedData = localStorage.getItem("LocalDataArr");
     var items = JSON.parse(localStorage.getItem("LocalDataArr"));
-    //Delete row from table
     $("table#taskTbl tr#" + props.variant.id + "").remove();
     //Delete row from localstorage
     for (var i = 0; i < items.length; i++) {
@@ -137,7 +136,6 @@ export default class task extends Component {
       this.setState({
         dataArr: response.data,
       });
-      console.log("Data", this.state.dataArr);
       localStorage.setItem("LocalDataArr", JSON.stringify(this.state.dataArr));
     });
   }

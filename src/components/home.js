@@ -1,4 +1,5 @@
 import React, { component, Component } from "react";
+import { Redirect } from "react-router-dom";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,7 +11,6 @@ import Navbar from "./navbar";
 
 export default class home extends Component {
   render() {
-    //const { value } = this.state;
     return <Navbar />;
   }
 }
