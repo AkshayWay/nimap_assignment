@@ -61,8 +61,12 @@ export default class login extends Component {
             <div className="card card-signin my-5">
               <div className="card-body">
                 <h5 className="card-title text-center">Sign In</h5>
-                <form className="form-signin" onSubmit={this.onLoginCheck}>
-                  <label>User Name</label>
+                <form
+                  className="form-signin"
+                  onSubmit={this.onLoginCheck}
+                  style={{ textAlign: "center" }}
+                >
+                  <label>Username</label>
                   <div className="form-label-group">
                     <input
                       type="text"
@@ -76,6 +80,7 @@ export default class login extends Component {
                     />
                   </div>
 
+                  <label>Password</label>
                   <div className="form-label-group">
                     <input
                       type="password"
